@@ -17,7 +17,7 @@ export class CdkGitStack extends cdk.Stack {
         input: CodePipelineSource.gitHub("OGLernings/TPS-REPO", "main"),
         commands: ["npm ci", "npm run build", "npx cdk synth"],
       }),
-      pipelineName: "GCPipeline",
+      pipelineName: "cdkPipeline",
     });
 
     const devStage = cdkgit.addStage(
