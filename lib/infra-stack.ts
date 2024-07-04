@@ -3,6 +3,7 @@ import { Construct } from "constructs";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import path = require("path");
+import * as connect from 'aws-cdk-lib/aws-connect';
 
 export class infraStack extends cdk.Stack {
   constructor(
@@ -33,6 +34,11 @@ export class infraStack extends cdk.Stack {
         SERVICENOW_USERNAME: "ssant09",
       },
       functionName: stageName + "cdkGetinfoCreateIncidentLambda040724",
+    });
+    const cfnIntegrationAssociation = new connect.CfnIntegrationAssociation(this, 'MyIntegration',{
+      instanceId:'arn:aws:connect:us-east-1:862165548342:instance/9d143828-a3fe-4d38-86f1-bd4a42e2addf',
+      integrationArn:'arn:aws:lambda:us-east-1:862165548342:function:devcdkGetinfoCreateIncidentLambda040724',
+      integrationType: 'LAMBDA_FUNCTION',
     });
   }
 }
